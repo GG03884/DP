@@ -1,0 +1,29 @@
+#include <iostream>
+#include <climits>
+using namespace std;
+int helper(int **input,int m,int n,int ri,int ci)
+{
+	if(ri==(m-1)&&ci==(n-1))
+	{
+		return input[m-1][n-1];
+	}
+	if(ri>=m)
+	{
+		return INT_MAX;
+	}
+	if(ci>=n)
+	{
+		return INT_MAX;
+	}
+	int x=helper(input,m,n,ri+1,ci);
+	int y=helper(input,m,n,ri,ci+1);
+	int z=helper(input,m,n,ri+1,ci+1);
+	return input[ri][ci]+min(x,min(y,z));
+
+}
+int minCostPath(int **input, int m, int n)
+{
+	//Write your code here
+	return helper(input,m,n,0,0);
+
+}
